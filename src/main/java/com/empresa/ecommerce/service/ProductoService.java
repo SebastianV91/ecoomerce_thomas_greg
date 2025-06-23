@@ -1,41 +1,20 @@
 package com.empresa.ecommerce.service;
 
 import com.empresa.ecommerce.model.Producto;
-import com.empresa.ecommerce.repository.ProductoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class ProductoService {
+public interface ProductoService {
 
-    private final ProductoRepository productoRepository;
+    public List<Producto> obtenerTodos();
 
-    @Autowired
-    public ProductoService(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
-    }
+    public Optional<Producto> obtenerPorId(Long id);
 
-    public List<Producto> obtenerTodos(){
-        return productoRepository.findAll();
-    }
+    public Producto guardar(Producto producto);
 
-    public Optional<Producto> obtenerPorId(Long id){
-        return productoRepository.findById(id);
-    }
+    public void eliminarPorId(Long id);
 
-    public Producto guardar(Producto producto){
-        return productoRepository.save(producto);
-    }
-
-    public void eliminarPorId(Long id){
-        productoRepository.deleteById(id);
-    }
-
-    public boolean existePorId(Long id){
-        return productoRepository.existsById(id);
-    }
+    public boolean existePorId(Long id);
 
 }

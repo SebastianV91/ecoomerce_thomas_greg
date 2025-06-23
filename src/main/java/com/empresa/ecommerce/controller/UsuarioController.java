@@ -33,22 +33,6 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<?> crearUsuario(@Valid @RequestBody Usuario usuario){
-
-        if(usuarioService.existeUsername(usuario.getUsername())){
-            return ResponseEntity.badRequest().body("El nombre de usuario ya está en uso");
-        }
-
-        if(usuarioService.existeEmail(usuario.getEmail())){
-            return ResponseEntity.badRequest().body("El correo electrónico ya está en uso");
-        }
-
-        Usuario nuevoUsuario = usuarioService.guardar(usuario);
-
-        return ResponseEntity.ok(nuevoUsuario);
-    }
-
     @DeleteMapping
     public ResponseEntity<?> eliminarUsuario(@PathVariable Long id){
 
